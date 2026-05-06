@@ -1,0 +1,45 @@
+<%= render "shared/partial" %>
+
+<h3>予定詳細</h3>
+
+<table>
+  <tr>
+    <th>タイトル</th>
+    <td><%= @task.title %></td>
+  </tr>
+
+  <tr>
+    <th>開始日</th>
+    <td><%= @task.start_date&.strftime("%Y年%m月%d日") || '未設定' %></td>
+  </tr>
+
+  <tr>
+    <th>終了日</th>
+    <td><%= @task.end_date&.strftime("%Y年%m月%d日") || '未設定' %></td>
+  </tr>
+
+  <tr>
+    <th>終日</th>
+    <td><%= @task.is_all_day ? '◯' : '' %></td>
+  </tr>
+  <tr>
+    <th>スケジュールメモ</th>
+    <td><%= simple_format(@task.memo) %></td>
+  </tr>
+
+  <tr>
+    <th>作成日時</th>
+    <td><%= @task.created_at.strftime("%Y年%m月%d日 %H:%M") %></td>
+  </tr>
+
+  <tr>
+    <th>更新日時</th>
+    <td><%= @task.updated_at.strftime("%Y年%m月%d日 %H:%M") %></td>
+  </tr>
+</table>
+
+<div style="margin-top: 20px;">
+  <%= link_to "編集", edit_task_path(@task) %> |
+  <%= link_to "一覧に戻る", tasks_path %> |
+  <li><%= button_to "削除", task_path(@task), method: :delete, data: { turbo_confirm: "本当に削除しますか?" } %></li>
+</div>

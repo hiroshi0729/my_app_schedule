@@ -1,0 +1,45 @@
+<%= render "shared/partial" %>
+
+<h3>予定の編集</h3>
+
+<% if flash[:notice_no_update] %>
+  <p style="color: red;"><%= flash[:notice_no_update] %></p>
+<% end %>
+
+<%= form_with(model: @task, local: true) do |form| %>
+  <%= render "shared/error", object: @task %>
+
+  <div>
+    <%= form.label :title, 'タイトル' %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :start_date, '開始日' %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div>
+    <%= form.label :end_date, '終了日' %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div>
+    <%= form.label :is_all_day, '終日' %>
+    <%= form.check_box :is_all_day %>
+  </div>
+
+  <div>
+    <%= form.label :memo, 'メモ' %>
+    <%= form.text_area :memo %>
+  </div>
+
+  <div>
+    <%= form.submit '更新' %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to "詳細", task_path(@task) %> |
+  <%= link_to "一覧", tasks_path %>
+</p>
